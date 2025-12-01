@@ -5,12 +5,12 @@ from django.db import models
 
 
 class Driver(AbstractUser):
-    license_number = models.CharField(unique=True)
+    license_number = models.CharField(unique=True, max_length=63)
 
     class Meta:
         ordering = ("license_number",)
-        verbose_name = "Driver"
-        verbose_name_plural = "Drivers"
+        verbose_name = "driver"
+        verbose_name_plural = "drivers"
 
 
 class Manufacturer(models.Model):
@@ -19,8 +19,8 @@ class Manufacturer(models.Model):
 
     class Meta:
         ordering = ("name",)
-        verbose_name = "Manufacturer"
-        verbose_name_plural = "Manufacturers"
+        verbose_name = "manufacturer"
+        verbose_name_plural = "manufacturers"
 
     def __str__(self) -> str:
         return self.name
@@ -28,12 +28,12 @@ class Manufacturer(models.Model):
 class Car(models.Model):
     model = models.CharField(max_length=63)
     manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
-    drivers = models.ManyToManyField(settings.AUTH_USER_MODEL)
+    drivers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="cars")
 
     class Meta:
         ordering = ("model",)
-        verbose_name = "Car"
-        verbose_name_plural = "Cars"
+        verbose_name = "car"
+        verbose_name_plural = "cars"
 
     def __str__(self) -> str:
         return self.model
