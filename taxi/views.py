@@ -1,3 +1,8 @@
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 
-# Create your views here.
+def index(request: HttpRequest) -> HttpResponse:
+    context = {
+        "some_var": "some variable",
+    }
+    return render(request, "taxi/index.html", context)
