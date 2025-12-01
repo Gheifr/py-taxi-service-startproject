@@ -5,7 +5,7 @@ from django.db import models
 
 
 class Driver(AbstractUser):
-    license_number = models.CharField(unique=True, max_length=63)
+    license_number = models.CharField(max_length=63, unique=True)
 
     class Meta:
         ordering = ("license_number",)
